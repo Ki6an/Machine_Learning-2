@@ -26,7 +26,7 @@ X = np.array(ct.fit_transform(X))
 # Avoiding dummy variable trap
 X = X[:, 1:]
 
-# # Split dataset
+# # # Split dataset
 # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 #
 # regressor = LinearRegression()
@@ -43,7 +43,6 @@ X = X[:, 1:]
 #
 # X = np.append(arr=np.ones((50, 1)).astype(int), values=X, axis=1)
 #
-#
 # # added column of 1s to matrix X, can also use statsmodels.tools.tools.add_constant(array)
 # #
 # # STEP 1: select significance level
@@ -56,7 +55,12 @@ X = X[:, 1:]
 #
 # # create new regressor from statsmodel
 # # exog .. intercept is not included by default, needs to be added by the user (code at line 45)
-# regressor_OLS = sm.OLS(endog=y, exog=X_opt).fit()# ordinary least square
+# regressor_OLS = sm.OLS(endog=y, exog=X_opt).fit()  # ordinary least square
+#
+# c = list(regressor_OLS.pvalues)
+# print(c, "<--- p values ")
+# print(c.index(max(c)))
+# # print(np.where(c == max(c)))
 #
 # regressor_OLS.summary()
 #
@@ -72,19 +76,23 @@ X = X[:, 1:]
 # print(regressor_OLS)
 
 
-
 # Automatic Backward Elimination
 def backwardelimination(x, sl):
     regressor_OLS = sm.OLS(y, x).fit()
     for i in range(0, len(x[0])):
-        maxp = max(regressor_OLS.pvalues)  # Find the max P-value
-        if maxp > sl:  # delete the max P-value which is greater than SL
-            x = np.delete(x, maxp, axis=1)
+        c = list(regressor_OLS.pvalues)
+        print(c, "<--- p values ")
+        j = c.index(max(c))
+        maxp = max(regressor_OLS.pvalues).astype(float)
+        if maxp > sl:
+            x = np.delete(x, j, axis=1)
             regressor_OLS = sm.OLS(y, x).fit()
+    print(regressor_OLS.summary())
     return x
 
 
-X = np.append(arr=np.ones((50, 1)).astype(int), values= X, axis=1)
-X_opt = X[:, [0, 1, 2, 3, 4, 5]]
+X = np.append(arr=np.ones((50, 1)).astype(int), values=X, axis=1)
+X_opt = X[:, [0, 1, 2, 3, 4, 5]].astype(float)
 SL = 0.05  # Significance Level
 X_Modeled = backwardelimination(X_opt, SL)
+print(X_Modeled)
