@@ -96,3 +96,8 @@ X_opt = X[:, [0, 1, 2, 3, 4, 5]].astype(float)
 SL = 0.05  # Significance Level
 X_Modeled = backwardelimination(X_opt, SL)
 print(X_Modeled)
+
+
+from sklearn.tree import DecisionTreeRegressor
+regressor = DecisionTreeRegressor(random_state=0)
+regressor.fit(X, y)
