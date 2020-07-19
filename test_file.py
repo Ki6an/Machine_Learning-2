@@ -68,3 +68,6 @@ plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
+
+from sklearn.svm import SVC
+# classifier = SVC(kernel=)
