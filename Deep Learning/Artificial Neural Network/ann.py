@@ -12,4 +12,4 @@ classifier.add(Dense(activation='relu', units=nh, kernel_initializer='uniform', 
 classifier.add(Dense(activation="relu", units=6, kernel_initializer="uniform"))
 
 classifier.compile()
-classifier.fit()
+classifier.evaluate()
