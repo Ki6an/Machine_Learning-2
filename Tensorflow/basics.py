@@ -14,7 +14,7 @@ with tf.compat.v1.Session() as ses:
     # Evaluate the tensor `c`.
     print(ses.run(c))
     print("Multiplication with constants: %i" % ses.run(a * b))
-"""
+
 
 # to get rid of the above method we use one simple line
 # and it is enabled by default
