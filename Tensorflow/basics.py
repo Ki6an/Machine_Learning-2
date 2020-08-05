@@ -1,7 +1,5 @@
 import tensorflow as tf
 
-
-
 # TF 2.0 supports eager execution so don't explicitly create a session and run the code in it, instead you it the conventional way
 
 
@@ -31,6 +29,7 @@ print("Multiplication with constants: ",  c)
 
 
 
-#
-# t = tf.constant([4, 2], tf.int16, [3], 'Const', True)
+
+
+
 
