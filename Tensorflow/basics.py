@@ -15,7 +15,6 @@ import tensorflow as tf
 #     print(ses.run(c))
 #     print("Multiplication with constants: %i" % ses.run(a * b))
 
-
 # to get rid of the above method we use one simple line
 # and it is enabled by default
 tf.compat.v1.enable_eager_execution()
